@@ -1,0 +1,46 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# --- Virtual environments ---
+.venv/
+venv/
+ENV/
+env/
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log
+
+# --- Jupyter Notebook checkpoints ---
+.ipynb_checkpoints/
+
+# --- Local data & indexes ---
+index.faiss
+metadata.json
+*.bin
+*.pkl
+
+# --- Env files (секреты, ключи) ---
+.env
+.env.*
+
+# --- Build/Dist ---
+build/
+dist/
+*.egg-info/
+
+# --- Cache ---
+.cache/
+.mypy_cache/
+.pytest_cache/
+
+# --- VSCode / JetBrains IDE ---
+.vscode/
+.idea/
