@@ -2,3 +2,6 @@ sentence-transformers
 faiss-cpu
 streamlit
 PyYAML
+PyMuPDF
+altair
+pandas

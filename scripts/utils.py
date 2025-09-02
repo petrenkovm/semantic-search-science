@@ -1,7 +1,7 @@
 # scripts/utils.py
 from pathlib import Path
 
-def load_documents(root: str = "data"):
+def load_documents(data_dir: str = "data"):
     """
     Читает все .txt и .md из папки root и возвращает список словарей:
     {
@@ -9,7 +9,7 @@ def load_documents(root: str = "data"):
       "metadata": {"source": путь_к_файлу, "name": имя_файла}
     }
     """
-    root_path = Path(root)
+    root_path = Path(data_dir)
     docs = []
     for path in root_path.rglob("*"):
         if path.suffix.lower() in {".txt", ".md"}:

@@ -30,6 +30,16 @@ class SemanticSearcher:
         print(f"[INFO] Загружаем метаданные: {metadata_path}")
         with open(metadata_path, "rb") as f:
             self.metadata = pickle.load(f)
+            
+        self.texts = []
+        for meta in self.metadata:
+            try:
+                with open(meta["source"], "r", encoding="utf-8") as f:
+                    self.texts.append(f.read())
+            except Exception as e:
+                print(f"[WARN] Не удалось прочитать {meta['source']}: {e}")
+                self.texts.append("")
+
 
     def search(self, query: str):
         print(f"[INFO] Поиск запроса: {query}")
@@ -39,10 +49,14 @@ class SemanticSearcher:
 
         distances, indices = self.index.search(query_embedding, self.top_k)
         results = []
-        for i, idx in enumerate(indices[0]):
-            result = {
-                "text": self.metadata[idx]["text"],
-                "source": self.metadata[idx].get("source", "N/A"),
-                "score": float(distances[0][i])
-            }
+        for idx, score in zip(indices[0], distances[0]):
+            results.append({
+                "text": self.texts[idx],
+                "score": float(score),
+                "metadata": self.metadata[idx]
+            })
             results
+            print(f"[DEBUG] idx={idx}, score={score}")
+            print(f"[DEBUG] text={self.texts[idx][:100]}")
+            
+        return results
